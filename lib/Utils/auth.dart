@@ -46,12 +46,11 @@ class DatabaseHelper {
       "phone": "$phone",
     });
     Map<String, dynamic> responseJson = new Map();
-     responseJson = json.decode(response.body);
+    responseJson = json.decode(response.body);
     return (responseJson);
   }
 
   verify(int pin, int id) async {
-
     String myUrl = "$serverUrl/${'lang'.tr()}/api/verification";
     final response = await http.post(myUrl,
         headers: {'Accept': 'application/json'},

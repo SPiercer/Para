@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
-
-String serverUrl = "http://test.paraksa.com";
+String serverUrl = "http://paraksa.com";
 Widget loadingIndicator = CircularProgressIndicator();
 void showInSnackBar(
     String value, BuildContext context, GlobalKey<ScaffoldState> _scaffoldKey,

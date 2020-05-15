@@ -1,6 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:para_new/Utils/webView.dart';
 import 'package:table_calendar/table_calendar.dart';
+import 'package:toast/toast.dart';
 
 import '../Helpers/colors.dart';
 import '../Helpers/constants.dart';
@@ -21,7 +23,6 @@ class _DoctorDatesState extends State<DoctorDates>
     with SingleTickerProviderStateMixin {
   AnimationController controller;
   Animation<double> scaleAnimation;
-
   @override
   void initState() {
     super.initState();
@@ -30,10 +31,6 @@ class _DoctorDatesState extends State<DoctorDates>
         AnimationController(vsync: this, duration: Duration(milliseconds: 450));
     scaleAnimation =
         CurvedAnimation(parent: controller, curve: Curves.elasticInOut);
-
-    controller.addListener(() {
-      setState(() {});
-    });
     controller.forward();
   }
 
@@ -81,7 +78,6 @@ class _DoctorDatesState extends State<DoctorDates>
                       final item = listOfTiles[index];
                       return InkWell(
                         onTap: () {
-                  
                           showDialog<void>(
                             context: context,
                             builder: (BuildContext context) {
@@ -89,7 +85,14 @@ class _DoctorDatesState extends State<DoctorDates>
                                 content: SingleChildScrollView(
                                   child: ListBody(
                                     children: <Widget>[
-                                      Text('information').tr(context: context),
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: <Widget>[
+                                          Text('information')
+                                              .tr(context: context),
+                                        ],
+                                      ),
                                     ],
                                   ),
                                 ),
@@ -103,9 +106,22 @@ class _DoctorDatesState extends State<DoctorDates>
                                   ),
                                   FlatButton(
                                     child: Text('book').tr(context: context),
-                                    onPressed: () {
-                                      APIs.sendMyDate(serverUrl +
-                                          "/${'lang'.tr()}/api/appointment/${item['id']}");
+                                    onPressed: () async {
+                                      Toast.show('Please Wait', context,
+                                          duration: 60);
+                                      var response = await APIs.sendMyDate(
+                                          url: serverUrl +
+                                              "/${'lang'.tr()}/api/paymantAppointment",
+                                          id: "${item['id']}");
+                                      print('----------------------------');
+                                      print(response);
+                                      await Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) => WView(
+                                                    response: response,
+                                                    order: item['id'],
+                                                  )));
                                       Navigator.of(context).pop();
                                       Navigator.of(context).pop();
                                     },

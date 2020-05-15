@@ -113,7 +113,6 @@ class _RegisterState extends State<Register> {
                             controller: namecont,
                           ),
                         ),
-                      
                         Container(
                           margin: EdgeInsets.only(top: 10, bottom: 10),
                           decoration: new BoxDecoration(
@@ -229,13 +228,13 @@ class _RegisterState extends State<Register> {
                                       passConfirm: passConfcont.text,
                                       phone: phonecont.text,
                                     );
-
+                                    print(response);
                                     if (response.containsKey('errors')) {
                                       List<String> m = [];
                                       response['errors'].forEach((k, v) {
                                         m.add(v[0]);
                                       });
-                                      
+
                                       showDialog(
                                         context: context,
                                         builder: (BuildContext context) {

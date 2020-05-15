@@ -93,12 +93,13 @@ class _SearchState extends State<Search> {
                                           Flexible(
                                             child: Container(
                                                 child: Center(
-                                                    child: Text('doctors',
+                                                    child: Text(
+                                              'doctors',
                                               style: TextStyle(
                                                   color: Colors.white,
                                                   fontWeight: FontWeight.bold,
                                                   fontSize: 23),
-                                            ).tr(context:context))),
+                                            ).tr(context: context))),
                                             flex: 1,
                                           )
                                         ],
@@ -159,12 +160,13 @@ class _SearchState extends State<Search> {
                                           Flexible(
                                             child: Container(
                                                 child: Center(
-                                                    child: Text('specialties',
+                                                    child: Text(
+                                              'specialties',
                                               style: TextStyle(
                                                   color: Colors.white,
                                                   fontWeight: FontWeight.bold,
                                                   fontSize: 23),
-                                            ).tr(context:context))),
+                                            ).tr(context: context))),
                                             flex: 1,
                                           )
                                         ],
@@ -233,12 +235,13 @@ class _SearchState extends State<Search> {
                                           Flexible(
                                             child: Container(
                                                 child: Center(
-                                                    child: Text('clinics',
+                                                    child: Text(
+                                              'clinics',
                                               style: TextStyle(
                                                   color: Colors.white,
                                                   fontWeight: FontWeight.bold,
                                                   fontSize: 23),
-                                            ).tr(context:context))),
+                                            ).tr(context: context))),
                                             flex: 1,
                                           )
                                         ],

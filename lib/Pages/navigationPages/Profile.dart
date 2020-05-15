@@ -1,6 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:para_new/Utils/webView.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 
 import '../../Auth/login.dart';
 import '../../Helpers/colors.dart';
@@ -18,7 +20,7 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
- 
+  WebViewController webCont;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -109,7 +111,7 @@ class _ProfileState extends State<Profile> {
                                             borderRadius: BorderRadius.all(
                                                 Radius.circular(20))),
                                         child: Text(
-                                          item['email'],
+                                          "${item['email']}",
                                           style: TextStyle(
                                             color: Colors.black,
                                             fontSize: 12,
@@ -248,9 +250,8 @@ class _ProfileState extends State<Profile> {
                                     children: <Widget>[
                                       Expanded(
                                         child: Container(
-                                          child: Center(
-                                            child: Icon(Icons.email)
-                                          ),
+                                          child:
+                                              Center(child: Icon(Icons.email)),
                                         ),
                                         flex: 1,
                                       ),
@@ -259,7 +260,7 @@ class _ProfileState extends State<Profile> {
                                           child: Align(
                                             alignment: Alignment.centerRight,
                                             child: Text(
-                                              item['email'],
+                                              "${item['email']}",
                                             ),
                                           ),
                                         ),
@@ -303,7 +304,7 @@ class _ProfileState extends State<Profile> {
                                           child: Align(
                                             alignment: Alignment.centerRight,
                                             child: Text(
-                                              item['email'],
+                                              "${item['email']}",
                                             ),
                                           ),
                                         ),
