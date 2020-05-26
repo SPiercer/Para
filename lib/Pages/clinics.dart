@@ -82,7 +82,7 @@ class _ClinicsState extends State<Clinics> {
       setState(() {
         nextLink = value['next_page_url'];
       });
-      for (int i = 0; i<value['data'].length; i++){
+      for (int i = 0; i < value['data'].length; i++) {
         items.add(value['data'][i]);
       }
     });
@@ -111,7 +111,7 @@ class _ClinicsState extends State<Clinics> {
               itemCount: items.length,
               itemBuilder: (context, index) {
                 var clinic = items[index]['clinic'];
-
+                print(clinic['doctors'].length);
                 return Padding(
                   padding: const EdgeInsets.only(bottom: 16.0),
                   child: Container(
@@ -250,7 +250,7 @@ class _ClinicsState extends State<Clinics> {
                                                 alignment:
                                                     Alignment.centerRight,
                                                 child: Text(
-                                                  "${'number of'.tr()} : ${items.length}",
+                                                  "${'number of'.tr()} : ${clinic['doctors'].length}",
                                                   style: TextStyle(
                                                       color: UIColors
                                                           .PRIMARY_COLOR,

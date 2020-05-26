@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:para_new/Helpers/constants.dart';
 
 import '../Auth/login.dart';
 import '../Helpers/colors.dart';
@@ -38,13 +39,12 @@ class _RegisterSecondStepState extends State<RegisterSecondStep> {
                       Flexible(
                         child: Container(
                           child: Align(
-                            alignment: Alignment.bottomCenter,
-                            child: Text(
-                              "حساب جديد",
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 20),
-                            ),
-                          ),
+                              alignment: Alignment.bottomCenter,
+                              child: Text(
+                                "register",
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 20),
+                              ).tr(context: context)),
                         ),
                         flex: 1,
                       ),
@@ -108,7 +108,17 @@ class _RegisterSecondStepState extends State<RegisterSecondStep> {
                                 maxLength: 4,
                                 onSubmitted: (String pin) async {
                                   int pinInt = int.parse(pin);
-                                 
+
+                                  showDialog(
+                                      context: context,
+                                      builder: (context) => AlertDialog(
+                                            actions: <Widget>[
+                                              Center(
+                                                child: loadingIndicator,
+                                              ),
+                                              Text('Please Wait')
+                                            ],
+                                          ));
                                   var response = await DatabaseHelper()
                                       .verify(pinInt, widget.userid);
                                   if (response['code'] == 404) {
@@ -124,13 +134,20 @@ class _RegisterSecondStepState extends State<RegisterSecondStep> {
                                                 style:
                                                     TextStyle(fontSize: 16.0),
                                               ),
+                                            ),
+                                            RaisedButton(
+                                              child: Text('OK'),
+                                              onPressed: () {
+                                                Navigator.pop(context);
+                                                Navigator.pop(context);
+                                              },
                                             )
                                           ],
                                         );
                                       },
                                     );
                                   } else {
-                                     showDialog(
+                                    showDialog(
                                       context: context,
                                       builder: (BuildContext context) {
                                         return AlertDialog(
@@ -157,7 +174,7 @@ class _RegisterSecondStepState extends State<RegisterSecondStep> {
                                       },
                                     );
                                   }
-                                }, 
+                                },
                               ),
                             ),
                           ),

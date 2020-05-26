@@ -1,6 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:para_new/Utils/webView.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
@@ -99,27 +98,6 @@ class _ProfileState extends State<Profile> {
                                   ),
                                 ),
                                 flex: 1,
-                              ),
-                              Flexible(
-                                child: Container(
-                                  child: Align(
-                                    alignment: Alignment.topCenter,
-                                    child: Container(
-                                        padding: EdgeInsets.all(5),
-                                        decoration: BoxDecoration(
-                                            color: Colors.white,
-                                            borderRadius: BorderRadius.all(
-                                                Radius.circular(20))),
-                                        child: Text(
-                                          "${item['email']}",
-                                          style: TextStyle(
-                                            color: Colors.black,
-                                            fontSize: 12,
-                                          ),
-                                        )),
-                                  ),
-                                ),
-                                flex: 2,
                               ),
                             ],
                           ),
@@ -250,46 +228,6 @@ class _ProfileState extends State<Profile> {
                                     children: <Widget>[
                                       Expanded(
                                         child: Container(
-                                          child:
-                                              Center(child: Icon(Icons.email)),
-                                        ),
-                                        flex: 1,
-                                      ),
-                                      Expanded(
-                                        child: Container(
-                                          child: Align(
-                                            alignment: Alignment.centerRight,
-                                            child: Text(
-                                              "${item['email']}",
-                                            ),
-                                          ),
-                                        ),
-                                        flex: 7,
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ),
-                            flex: 1,
-                          ),
-                          Flexible(
-                            child: Container(
-                              padding: EdgeInsets.only(bottom: 8),
-                              child: ClipRRect(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(13)),
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    color: Colors.white,
-                                  ),
-                                  padding: EdgeInsets.only(right: 8),
-                                  child: Row(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.stretch,
-                                    children: <Widget>[
-                                      Expanded(
-                                        child: Container(
                                           child: Center(
                                             child: Icon(
                                               Icons.phone,
@@ -304,7 +242,7 @@ class _ProfileState extends State<Profile> {
                                           child: Align(
                                             alignment: Alignment.centerRight,
                                             child: Text(
-                                              "${item['email']}",
+                                              "${item['phone']}",
                                             ),
                                           ),
                                         ),

@@ -24,7 +24,7 @@ class _DoctorClinicState extends State<DoctorClinic> {
         backgroundColor: UIColors.BACKGROUND_COLOR,
         appBar: AppBar(
           centerTitle: true,
-          title: Text('doctors').tr(context:context),
+          title: Text('doctors').tr(context: context),
           backgroundColor: UIColors.PRIMARY_COLOR,
         ),
         body: ListView.builder(
@@ -33,7 +33,7 @@ class _DoctorClinicState extends State<DoctorClinic> {
             itemBuilder: (context, index) {
               var doctor = widget.docList['doctors'][index];
               var clinic = widget.docList;
-
+              print(clinic);
               return Padding(
                 padding: const EdgeInsets.only(bottom: 16.0),
                 child: Container(
@@ -124,7 +124,7 @@ class _DoctorClinicState extends State<DoctorClinic> {
                                                         child: Container(
                                                             child: Icon(
                                                                 Icons
-                                                                    .location_on,
+                                                                    .local_hospital,
                                                                 color: Colors
                                                                     .white)),
                                                         flex: 1,
@@ -135,8 +135,8 @@ class _DoctorClinicState extends State<DoctorClinic> {
                                                               alignment: Alignment
                                                                   .centerRight,
                                                               child: Text(
-                                                                clinic[
-                                                                    'address'],
+                                                                doctor['specialty']
+                                                                    ['name'],
                                                                 style: TextStyle(
                                                                     color: Colors
                                                                         .white,
@@ -276,10 +276,11 @@ class _DoctorClinicState extends State<DoctorClinic> {
                                   },
                                   color: UIColors.SECONDARY_COLOR,
                                   child: Center(
-                                    child: Text('book',
+                                    child: Text(
+                                      'book',
                                       style: TextStyle(
                                           color: Colors.white, fontSize: 16),
-                                    ).tr(context:context),
+                                    ).tr(context: context),
                                   )),
                             ),
                           )),

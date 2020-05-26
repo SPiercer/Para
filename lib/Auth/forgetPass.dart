@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:para_new/Helpers/constants.dart';
 
 import '../Helpers/colors.dart';
 import '../Helpers/scroll.dart';
@@ -12,7 +13,10 @@ class ForgetPass extends StatefulWidget {
 
 class _ForgetPassState extends State<ForgetPass> {
   TextEditingController phonecont = new TextEditingController();
-
+  Widget load = Text(
+    'reset',
+    style: TextStyle(color: Colors.white, fontSize: 20),
+  ).tr();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -108,7 +112,17 @@ class _ForgetPassState extends State<ForgetPass> {
                             child: Container(
                               child: InkWell(
                                 onTap: () {
+                                  setState(() {
+                                    load = loadingIndicator;
+                                  });
                                   if (phonecont.text == '') {
+                                    setState(() {
+                                      load = Text(
+                                        'reset',
+                                        style: TextStyle(
+                                            color: Colors.white, fontSize: 20),
+                                      ).tr();
+                                    });
                                     showDialog(
                                         context: context,
                                         builder: (context) {
@@ -134,10 +148,17 @@ class _ForgetPassState extends State<ForgetPass> {
                                         });
                                   } else {
                                     DatabaseHelper()
-                                        .resetPass(
-                                            phone: int.parse(phonecont.text))
+                                        .resetPass(phone: phonecont.text)
                                         .then((res) {
                                       if (res.containsKey('errors')) {
+                                        setState(() {
+                                          load = Text(
+                                            'reset',
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 20),
+                                          ).tr();
+                                        });
                                         showDialog(
                                             context: context,
                                             builder: (context) {
@@ -162,6 +183,14 @@ class _ForgetPassState extends State<ForgetPass> {
                                               );
                                             });
                                       } else {
+                                        setState(() {
+                                          load = Text(
+                                            'reset',
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 20),
+                                          ).tr();
+                                        });
                                         showDialog(
                                             context: context,
                                             builder: (context) {
@@ -194,13 +223,7 @@ class _ForgetPassState extends State<ForgetPass> {
                                       color: UIColors.PRIMARY_COLOR,
                                       borderRadius:
                                           BorderRadius.all(Radius.circular(8))),
-                                  child: Center(
-                                    child: Text(
-                                      'reset',
-                                      style: TextStyle(
-                                          color: Colors.white, fontSize: 20),
-                                    ).tr(context: context),
-                                  ),
+                                  child: Center(child: load),
                                 ),
                               ),
                             ),

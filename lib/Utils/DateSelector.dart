@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:para_new/Utils/webView.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:toast/toast.dart';
 
@@ -42,7 +43,7 @@ class _DoctorDatesState extends State<DoctorDates>
         child: ScaleTransition(
           scale: scaleAnimation,
           child: Container(
-            height: MediaQuery.of(context).size.height * .70,
+            height: MediaQuery.of(context).size.height * .80,
             width: MediaQuery.of(context).size.width - 32,
             padding: EdgeInsets.all(16),
             decoration: BoxDecoration(
@@ -77,7 +78,10 @@ class _DoctorDatesState extends State<DoctorDates>
                     itemBuilder: (context, index) {
                       final item = listOfTiles[index];
                       return InkWell(
-                        onTap: () {
+                        onTap: () async {
+                          final prefs = await SharedPreferences.getInstance();
+                          final commission = prefs.get('commission');
+
                           showDialog<void>(
                             context: context,
                             builder: (BuildContext context) {
@@ -89,8 +93,53 @@ class _DoctorDatesState extends State<DoctorDates>
                                         crossAxisAlignment:
                                             CrossAxisAlignment.center,
                                         children: <Widget>[
-                                          Text('information')
-                                              .tr(context: context),
+                                          Text(
+                                            'information',
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.w600),
+                                          ).tr(context: context),
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: <Widget>[
+                                              Icon(Icons.person),
+                                              Text(widget.doctor['name'])
+                                            ],
+                                          ),
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceEvenly,
+                                            children: <Widget>[
+                                              Icon(Icons.attach_money),
+                                              Text('الحجز: '),
+                                              Text(widget.doctor[
+                                                      'disclosure_price'] +
+                                                  ' | '),
+                                              //      Icon(Icons.money_off),
+                                              Text('العمولة: '),
+                                              Text(commission.toString())
+                                            ],
+                                          ),
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: <Widget>[
+                                              Icon(Icons.monetization_on),
+                                              Text('الاجمالي: '),
+                                              Text((commission +
+                                                      double.parse(widget
+                                                              .doctor[
+                                                          'disclosure_price']))
+                                                  .toString())
+                                            ],
+                                          ),
+                                          Divider(),
+                                          Text(
+                                            'في حاله عدم الحضور لا يتم استرجاع المبلغ و في حاله التأخر عن الموعد يتم ادخالك بعد اخر مراجع',
+                                            style: TextStyle(
+                                                fontSize: 20,
+                                                fontWeight: FontWeight.bold),
+                                          )
                                         ],
                                       ),
                                     ],
@@ -166,6 +215,7 @@ class _DoctorDatesState extends State<DoctorDates>
                     initialSelectedDay: DateTime.now(),
                     onDaySelected: (date, list) {
                       setState(() {
+                        listOfTiles = [];
                         listOfTiles.addAll(list);
                       });
                     },
@@ -203,22 +253,4 @@ class _DoctorDatesState extends State<DoctorDates>
   Map<DateTime, List<dynamic>> events = new Map();
   CalendarController _calendarController = new CalendarController();
   List listOfTiles = new List();
-}
-
-class Date {
-  String date;
-  String from;
-  int id;
-  String to;
-  bool selected = false;
-  Date({this.date, this.from, this.id, this.to});
-
-  factory Date.fromJson(Map<String, dynamic> json) {
-    return Date(
-      date: json['date'] as String,
-      from: json['from'] as String,
-      id: json['id'] as int,
-      to: json['to'] as String,
-    );
-  }
 }

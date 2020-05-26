@@ -12,7 +12,7 @@ class DatabaseHelper {
   regData({String name, String phone, String pass, String passConfirm}) async {
     Map<String, dynamic> responseJson = new Map();
     String myUrl = "$serverUrl/${'lang'.tr()}/api/signup";
-
+    print(myUrl);
     final response = await http.post(myUrl, headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/x-www-form-urlencoded'
@@ -23,6 +23,7 @@ class DatabaseHelper {
       "password_confirmation": "$passConfirm",
     });
     responseJson = json.decode(response.body);
+    print(responseJson);
     return responseJson;
   }
 
@@ -36,9 +37,10 @@ class DatabaseHelper {
     });
     status = response.body.contains('error');
     data = json.decode(response.body);
+    print(data);
   }
 
-  resetPass({int phone}) async {
+  resetPass({String phone}) async {
     String myUrl = "$serverUrl/${'lang'.tr()}/api/forget";
     final response = await http.post(myUrl, headers: {
       'Accept': 'application/json'
@@ -47,6 +49,7 @@ class DatabaseHelper {
     });
     Map<String, dynamic> responseJson = new Map();
     responseJson = json.decode(response.body);
+    print(responseJson);
     return (responseJson);
   }
 
@@ -57,6 +60,7 @@ class DatabaseHelper {
         body: {"pin": "$pin", "id": "$id"});
     Map<String, dynamic> responseJson = new Map();
     responseJson = json.decode(response.body);
+    print(responseJson);
     return responseJson;
   }
 

@@ -5,7 +5,7 @@ import '../../Helpers/colors.dart';
 import '../../Utils/DateSelector.dart';
 
 class DoctorsSpec extends StatefulWidget {
- final List docList;
+  final List docList;
   final int index;
   DoctorsSpec({this.docList, this.index});
   @override
@@ -19,7 +19,7 @@ class _DoctorsSpecState extends State<DoctorsSpec> {
         backgroundColor: UIColors.BACKGROUND_COLOR,
         appBar: AppBar(
           centerTitle: true,
-        title: Text('doctors').tr(context:context),
+          title: Text('doctors').tr(context: context),
           backgroundColor: UIColors.PRIMARY_COLOR,
         ),
         body: ListView.builder(
@@ -78,7 +78,7 @@ class _DoctorsSpecState extends State<DoctorsSpec> {
                                         children: <Widget>[
                                           Expanded(
                                             child: Text(
-                                               clinic['description'],
+                                              clinic['description'],
                                               style: TextStyle(
                                                   color: UIColors.PRIMARY_COLOR,
                                                   fontSize: 18),
@@ -115,7 +115,10 @@ class _DoctorsSpecState extends State<DoctorsSpec> {
                                                             padding:
                                                                 EdgeInsets.all(
                                                                     3),
-                                                            child: Icon(Icons.person,color: Colors.white)),
+                                                            child: Icon(
+                                                                Icons.person,
+                                                                color: Colors
+                                                                    .white)),
                                                         flex: 1,
                                                       ),
                                                       Expanded(
@@ -148,8 +151,11 @@ class _DoctorsSpecState extends State<DoctorsSpec> {
                                                     children: <Widget>[
                                                       Expanded(
                                                         child: Container(
-                                                          child: Icon(Icons.location_on,color: Colors.white)
-                                                        ),
+                                                            child: Icon(
+                                                                Icons
+                                                                    .local_hospital,
+                                                                color: Colors
+                                                                    .white)),
                                                         flex: 1,
                                                       ),
                                                       Expanded(
@@ -158,8 +164,8 @@ class _DoctorsSpecState extends State<DoctorsSpec> {
                                                               alignment: Alignment
                                                                   .centerRight,
                                                               child: Text(
-                                                                clinic[
-                                                                    'address'],
+                                                                doctor['specialty']
+                                                                    ['name'],
                                                                 style: TextStyle(
                                                                     color: Colors
                                                                         .white,
@@ -183,8 +189,11 @@ class _DoctorsSpecState extends State<DoctorsSpec> {
                                                     children: <Widget>[
                                                       Expanded(
                                                         child: Container(
-                                                          child: Icon(Icons.monetization_on,color: Colors.white)
-                                                        ),
+                                                            child: Icon(
+                                                                Icons
+                                                                    .monetization_on,
+                                                                color: Colors
+                                                                    .white)),
                                                         flex: 1,
                                                       ),
                                                       Expanded(
@@ -193,7 +202,7 @@ class _DoctorsSpecState extends State<DoctorsSpec> {
                                                               alignment: Alignment
                                                                   .centerRight,
                                                               child: Text(
-                                                                    "${doctor['disclosure_price']}  ${'sr'.tr()} ",
+                                                                "${doctor['disclosure_price']}  ${'sr'.tr()} ",
                                                                 style: TextStyle(
                                                                     color: Colors
                                                                         .white,
@@ -217,7 +226,10 @@ class _DoctorsSpecState extends State<DoctorsSpec> {
                                                     children: <Widget>[
                                                       Expanded(
                                                         child: Container(
-                                                          child: Icon(Icons.access_time,color: Colors.white),
+                                                          child: Icon(
+                                                              Icons.access_time,
+                                                              color:
+                                                                  Colors.white),
                                                         ),
                                                         flex: 1,
                                                       ),
@@ -227,7 +239,7 @@ class _DoctorsSpecState extends State<DoctorsSpec> {
                                                               alignment: Alignment
                                                                   .centerRight,
                                                               child: Text(
-                                                                    "${doctor['detection_duration']} ${'min'.tr()}",
+                                                                "${doctor['detection_duration']} ${'min'.tr()}",
                                                                 style: TextStyle(
                                                                     color: Colors
                                                                         .white,
@@ -294,10 +306,10 @@ class _DoctorsSpecState extends State<DoctorsSpec> {
                                   color: UIColors.SECONDARY_COLOR,
                                   child: Center(
                                     child: Text(
-                                       'book',
+                                      'book',
                                       style: TextStyle(
                                           color: Colors.white, fontSize: 16),
-                                    ).tr(context:context),
+                                    ).tr(context: context),
                                   )),
                             ),
                           )),

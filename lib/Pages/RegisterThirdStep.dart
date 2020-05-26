@@ -10,7 +10,6 @@ import '../Helpers/colors.dart';
 import '../Utils/APIs.dart';
 import '../Utils/home.dart';
 
-
 class RegisterThirdStep extends StatefulWidget {
   RegisterThirdStep({Key key}) : super(key: key);
 
@@ -33,9 +32,9 @@ class _RegisterThirdStepState extends State<RegisterThirdStep> {
     await APIs.getUserData().then((user) {
       setState(() {
         this.name.text = user['name'];
-        this.imagePath = user['imagePath'];
+        this.imagePath = user['image_path'];
 
-        this.phone.text = '';
+        this.phone.text = user['phone'];
         this.password.text = '';
         this.passwordConfirmation.text = '';
       });
@@ -60,8 +59,8 @@ class _RegisterThirdStepState extends State<RegisterThirdStep> {
       setState(() {
         this.registerApi = true;
       });
-      await APIs.updateUser(name.text, image, password.text,
-              passwordConfirmation.text)
+      await APIs.updateUser(
+              name.text, image, password.text, passwordConfirmation.text)
           .then((response) {
         Navigator.pushReplacement(
             context, MaterialPageRoute(builder: (context) => HomePage()));
@@ -196,7 +195,6 @@ class _RegisterThirdStepState extends State<RegisterThirdStep> {
                           ),
                         ),
                       ),
-                    
                       Container(
                         margin: EdgeInsets.only(top: 10, bottom: 10),
                         decoration: new BoxDecoration(
@@ -311,10 +309,11 @@ class _RegisterThirdStepState extends State<RegisterThirdStep> {
                               child: this.registerApi
                                   ? loadingIndicator
                                   : Center(
-                                      child: Text('edit',
+                                      child: Text(
+                                        'edit',
                                         style: TextStyle(
                                             color: Colors.white, fontSize: 20),
-                                      ).tr(context:context),
+                                      ).tr(context: context),
                                     )),
                         )),
                   ),

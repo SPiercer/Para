@@ -19,6 +19,7 @@ class _RegisterState extends State<Register> {
     'register',
     style: TextStyle(color: Colors.white, fontSize: 20),
   ).tr();
+
   TextEditingController namecont = new TextEditingController();
   TextEditingController phonecont = new TextEditingController();
   TextEditingController passcont = new TextEditingController();
@@ -214,81 +215,87 @@ class _RegisterState extends State<Register> {
                           child: Container(
                             child: InkWell(
                               onTap: () async {
-                                if (namecont.text != '' ||
-                                    passcont.text != '' ||
-                                    passConfcont.text != '') {
-                                  setState(() {
-                                    load = loadingIndicator;
-                                  });
-                                  if (passcont.text == passConfcont.text) {
-                                    var response =
-                                        await DatabaseHelper().regData(
-                                      name: namecont.text,
-                                      pass: passcont.text,
-                                      passConfirm: passConfcont.text,
-                                      phone: phonecont.text,
-                                    );
-                                    print(response);
-                                    if (response.containsKey('errors')) {
-                                      List<String> m = [];
-                                      response['errors'].forEach((k, v) {
-                                        m.add(v[0]);
-                                      });
+                                try {
+                                  if (namecont.text != '' ||
+                                      passcont.text != '' ||
+                                      passConfcont.text != '') {
+                                    setState(() {
+                                      load = loadingIndicator;
+                                    });
+                                    if (passcont.text == passConfcont.text) {
+                                      var response =
+                                          await DatabaseHelper().regData(
+                                        name: namecont.text,
+                                        pass: passcont.text,
+                                        passConfirm: passConfcont.text,
+                                        phone: phonecont.text,
+                                      );
+                                      print(response);
+                                      if (response.containsKey('errors')) {
+                                        List<String> m = [];
+                                        response['errors'].forEach((k, v) {
+                                          m.add(v[0]);
+                                        });
 
-                                      showDialog(
-                                        context: context,
-                                        builder: (BuildContext context) {
-                                          return AlertDialog(
-                                            actions: <Widget>[
-                                              Center(
-                                                child: Text(
-                                                  m.toString(),
-                                                  textAlign: TextAlign.center,
-                                                  style:
-                                                      TextStyle(fontSize: 16.0),
-                                                ),
-                                              )
-                                            ],
-                                          );
-                                        },
-                                      );
-                                      setState(() {
-                                        load = Text(
-                                          'register',
-                                          style: TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 20),
-                                        ).tr();
-                                      });
-                                    } else {
-                                      showDialog(
-                                        context: context,
-                                        builder: (BuildContext context) {
-                                          return AlertDialog(
-                                            actions: <Widget>[
-                                              Center(
-                                                child: Text(
-                                                  'registered'.tr(),
-                                                  textAlign: TextAlign.center,
-                                                  style:
-                                                      TextStyle(fontSize: 16.0),
-                                                ),
-                                              )
-                                            ],
-                                          );
-                                        },
-                                      );
-                                      Navigator.pushReplacement(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  RegisterSecondStep(
-                                                    userid: response['user']
-                                                        ['id'],
-                                                  )));
+                                        showDialog(
+                                          context: context,
+                                          builder: (BuildContext context) {
+                                            return AlertDialog(
+                                              actions: <Widget>[
+                                                Center(
+                                                  child: Text(
+                                                    m.toString(),
+                                                    textAlign: TextAlign.center,
+                                                    style: TextStyle(
+                                                        fontSize: 16.0),
+                                                  ),
+                                                )
+                                              ],
+                                            );
+                                          },
+                                        );
+                                        setState(() {
+                                          load = Text(
+                                            'register',
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 20),
+                                          ).tr();
+                                        });
+                                      } else {
+                                        showDialog(
+                                          context: context,
+                                          builder: (BuildContext context) {
+                                            return AlertDialog(
+                                              actions: <Widget>[
+                                                Center(
+                                                  child: Text(
+                                                    'registered'.tr(),
+                                                    textAlign: TextAlign.center,
+                                                    style: TextStyle(
+                                                        fontSize: 16.0),
+                                                  ),
+                                                )
+                                              ],
+                                            );
+                                          },
+                                        );
+                                        Navigator.pushReplacement(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    RegisterSecondStep(
+                                                      userid: response['user']
+                                                          ['id'],
+                                                    )));
+                                      }
                                     }
+                                  } else {
+                                    Toast.show('no creds'.tr(), context,
+                                        duration: Toast.LENGTH_LONG);
                                   }
-                                } else {
+                                } catch (e) {
+                                  print(e);
                                   Toast.show('no creds'.tr(), context,
                                       duration: Toast.LENGTH_LONG);
                                 }

@@ -76,8 +76,7 @@ class _DoctorsState extends State<Doctors> {
   }
 
   getPages() async {
-    await APIs.getAllDoctors(
-            serverUrl + "/${'lang'.tr()}/api/doctors?page=1")
+    await APIs.getAllDoctors(serverUrl + "/${'lang'.tr()}/api/doctors?page=1")
         .then((value) {
       setState(() {
         nextLink = value['next_page_url'];
@@ -236,7 +235,7 @@ class _DoctorsState extends State<Doctors> {
                                                         child: Container(
                                                             child: Icon(
                                                                 Icons
-                                                                    .location_on,
+                                                                    .local_hospital,
                                                                 color: Colors
                                                                     .white)),
                                                         flex: 1,
@@ -247,8 +246,8 @@ class _DoctorsState extends State<Doctors> {
                                                               alignment: Alignment
                                                                   .centerRight,
                                                               child: Text(
-                                                                clinic[
-                                                                    'address'],
+                                                                doctor['specialty']
+                                                                    ['name'],
                                                                 style: TextStyle(
                                                                     color: Colors
                                                                         .white,

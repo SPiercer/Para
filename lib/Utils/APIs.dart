@@ -87,6 +87,22 @@ class APIs {
   }
 
   //User API ********************************************
+  static void getCommission() async {
+    final prefs = await SharedPreferences.getInstance();
+    if (prefs.containsKey('commission')) prefs.remove('commission');
+    final token = prefs.get('token');
+    String myUrl = serverUrl + "/${'lang'.tr()}/api";
+    final response = await http.get(myUrl, headers: {
+      'Accept': 'application/json',
+      'Authorization': 'Bearer $token'
+    });
+    final jsonResponse = json.decode(response.body);
+    print(jsonResponse);
+    double commission = double.parse(jsonResponse['commission']);
+    prefs.setDouble('commission', commission);
+    print(prefs.get('commission'));
+  }
+
   static Future getUserData() async {
     final prefs = await SharedPreferences.getInstance();
     final token = prefs.get('token');
@@ -114,16 +130,20 @@ class APIs {
       List<int> imageBytes = image.readAsBytesSync();
       base64Image = base64Encode(imageBytes);
     }
-    final response = await http.put(url, headers: {
-      'Accept': 'application/json',
-      'Authorization': 'Bearer $token',
-      'Content-Type': 'application/x-www-form-urlencoded'
-    }, body: {
-      'name': "$name",
-      'image': base64Image,
-      'password': "$password",
-      'passwordConfirmation': "$passwordConfirmation",
-    });
+    final response = await http.put(
+      url,
+      headers: {
+        'Accept': 'application/json',
+        'Authorization': 'Bearer $token',
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      body: {
+        'name': "$name",
+        'image': "$base64Image",
+        'password': "$password",
+        'passwordConfirmation': "$passwordConfirmation",
+      },
+    );
     responseJson = json.decode(response.body);
     return responseJson;
   }
