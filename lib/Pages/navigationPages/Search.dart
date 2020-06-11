@@ -1,5 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:toast/toast.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../clinics.dart';
 import '../doctorspages/doctors.dart';
@@ -22,6 +24,25 @@ class _SearchState extends State<Search> {
         height: MediaQuery.of(context).size.height,
         child: Column(
           children: <Widget>[
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Align(
+                alignment: Alignment.centerRight,
+                child: FloatingActionButton(
+                  onPressed: () =>
+                      launch("mailto:paraservice1122@gmail.com").then((value) {
+                    if (!value) {
+                      showDialog(
+                          context: context,
+                          child: AlertDialog(
+                            title: Text('لا يوجد تطبيق بريد'),
+                          ));
+                    }
+                  }),
+                  child: Icon(Icons.email),
+                ),
+              ),
+            ),
             Flexible(
               child: Container(
                 color: Colors.white,

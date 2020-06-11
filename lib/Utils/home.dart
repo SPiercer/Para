@@ -1,10 +1,6 @@
-import 'dart:io';
-
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_appavailability/flutter_appavailability.dart';
 import 'package:para_new/Utils/APIs.dart';
-import 'package:toast/toast.dart';
 
 import '../Helpers/colors.dart';
 import '../Pages/navigationPages/MyDates.dart';
@@ -36,21 +32,6 @@ class _HomePageState extends State<HomePage> {
     return Container();
   }
 
-  void openMail(BuildContext context) {
-    try {
-      AppAvailability.launchApp(
-              Platform.isIOS ? "message://" : "com.google.android.gm")
-          .then((_) {
-        print("App Email launched!");
-      }).catchError((err) {
-        Toast.show("App Email not found!", context);
-        print(err);
-      });
-    } catch (e) {
-      Toast.show("Email App not found!", context);
-    }
-  }
-
   @override
   void initState() {
     super.initState();
@@ -62,10 +43,6 @@ class _HomePageState extends State<HomePage> {
     return WillPopScope(
       onWillPop: () => null,
       child: Scaffold(
-        floatingActionButton: FloatingActionButton(
-          onPressed: () => openMail(context),
-          child: Icon(Icons.email),
-        ),
         body: this.body(),
         bottomNavigationBar: new BottomNavigationBar(
           currentIndex: selectedPage,

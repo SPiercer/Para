@@ -19,6 +19,13 @@ class _WViewState extends State<WView> {
         if (Uri.dataFromString(page).queryParameters['Result'] ==
             'Successful') {
           APIs.success(id: widget.order);
+        } else if (Uri.dataFromString(page).queryParameters['Result'] ==
+            'Failed') {
+          showDialog(
+              context: context,
+              child: AlertDialog(
+                title: Text('برجاء التاكد من صحه البيانات و المحاولة مره اخري'),
+              ));
         }
       },
       initialUrl:
