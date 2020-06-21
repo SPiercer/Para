@@ -1,6 +1,6 @@
 name: para_new
 description: A new Flutter project.
-version: 1.0.0+1
+version: 2.0.0+1
 
 environment:
   sdk: ">=2.1.0 <3.0.0"
@@ -17,7 +17,7 @@ dependencies:
   easy_localization: ^2.0.0
   table_calendar: ^2.2.3
   webview_flutter: ^0.3.21
-  flutter_appavailability: ^0.0.21
+  url_launcher: ^5.4.10
 dev_dependencies:
   flutter_localizations:
     sdk: flutter
